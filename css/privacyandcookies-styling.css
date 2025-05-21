@@ -1,0 +1,8 @@
+.title-text {
+    font-size: 30px;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+}

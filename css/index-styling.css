@@ -48,3 +48,126 @@ a {
     color: black;
 }
 /* Einde Footer */
+body {
+
+}
+
+nav {
+    display: flex;
+    justify-content: flex-start;
+    gap: 100px;
+    margin: 20px;
+}
+
+.navigatie {
+    margin-top: 60px;
+    gap: 50px;
+    display: flex;
+    flex: 1;
+}
+
+.login-parent {
+    margin-top: 40px;
+    display: flex;
+    gap: 50px;
+}
+
+.logo-image {
+    width: 173px;
+    height: 173px;
+}
+
+.login-image {
+    width: 60px;
+    height: 60px;
+}
+
+.search-image {
+    width: 60px;
+    height: 60px;
+}
+
+.background {
+    height: 364px;
+    background-image: url("../images/kalen-emsley-Bkci_8qcdvQ-unsplash.jpg");
+    background-position: center top;
+    background-size: cover;
+}
+
+.vakantie {
+    background-color: white;
+    border-radius: 20px;
+    height: 50px;
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.vakantie-parent {
+    display: flex;
+    justify-content: center;
+}
+
+.toon {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 130px;
+}
+
+.toon-parent {
+    background-color: #A9E7F2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;
+    height: 40px;
+}
+
+
+.reizen-parent{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 65px;
+    margin-top: 70px;
+}
+
+.reizen{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.landen-parent{
+
+   display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+}
+
+.reizen-images{
+    height: 250px;
+    width: 300px;
+}
+
+.landen{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.landen-names{
+    display: flex;
+    justify-content: center;
+gap: 365px;
+}
+
+.garanties{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 80px;
+}

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/contact-styling.css">
+</head>
+<body>
+<div class="contact-container">
+    <!-- Contactformulier -->
+    <section class="contact-form">
+        <h2>Contacteer ons!</h2>
+        <form>
+            <label for="name">Naam:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="email">Telefoonnummer:</label>
+            <input type="email" id="telefoonnu" name="email" required>
+
+            <label for="message">Bericht:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Verzenden</button>
+        </form>
+    </section>
+</div>
+
+<!-- FAQ-sectie buiten contact -->
+<section class="faq-section">
+    <div class="faq-container">
+        <h2>FAQ</h2>
+        <p class="subtitle">Staat je vraag hier niet bij of heb je een specifieke vraag? Contacteer ons dan via het formulier hierboven.</p>
+
+        <div class="faq-item">
+            <button class="faq-question">Wat zijn de annuleringsvoorwaarden?</button>
+            <div class="faq-answer">Je kunt je reis tot 7 dagen van tevoren annuleren met volledige terugbetaling.</div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Hoe kan ik mijn boeking wijzigen?</button>
+            <div class="faq-answer">Neem contact op via het formulier hierboven met je boekingsnummer.</div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Bieden jullie groepskorting?</button>
+            <div class="faq-answer">Ja, groepen vanaf 10 personen krijgen een speciale korting. Neem contact op!</div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Toggle FAQ antwoorden
+    document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', () => {
+            const answer = button.nextElementSibling;
+            button.classList.toggle('active');
+            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+</script>
+
+</body>
+
+</html>

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/index-styling.css">
+    <link rel="stylesheet" href="css/booking-styling.css">
 </head>
 
 <body>
@@ -23,20 +24,28 @@
 
         <div class="login-parent">
             <div><img class="search-image" src="images/search.png" alt="search"></div>
-            <a href="login.html">  <div><img class="login-image" src="images/account.png" alt="login"></div> </a>
+            <a href="login.php">  <div><img class="login-image" src="images/account.png" alt="login"></div> </a>
         </div>
     </nav>
-    <div class="vakantie-parent">
-        <div class="vakantie">
-            <div class="bestemming">Bestemming</div>
-            <div class="datum">Datum</div>
-            <div class="hoelang">Hoelang</div>
-            <div class="personen">Personen</div>
-            <div class="toon-parent">
-                <div class="toon">Toon vakanties</div>
-            </div>
-        </div>
-    </div>
+    <form class="zoekbalk">
+        <input class="zoekveld" type="text" name="bestemming" placeholder="Bestemming">
+        <input class="zoekveld" type="date" name="datum">
+        <select class="zoekveld" name="hoelang">
+            <option value="">Hoelang</option>
+            <option value="3">3 dagen</option>
+            <option value="5">5 dagen</option>
+            <option value="7">1 week</option>
+            <option value="14">2 weken</option>
+        </select>
+        <select class="zoekveld" name="personen">
+            <option value="">Personen</option>
+            <option value="1">1 persoon</option>
+            <option value="2">2 personen</option>
+            <option value="3">3 personen</option>
+            <option value="4+">4 of meer</option>
+        </select>
+        <button type="submit" class="zoekknop">Toon vakanties</button>
+    </form>
 </div>
 <div class="reizen-parent">
     <div class="reizen">Onze populairste reizen</div>

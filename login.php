@@ -1,34 +1,33 @@
 <?php
-session_start(); // Niet vergeten als je sessies gebruikt!
+session_start();
 
 $servername = "mysql_db2";
 $username = "root";
 $password = "rootpassword";
+$conn = new PDO("mysql:host=$servername;dbname=login_systeem", $username, $password);
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=login_systeem", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $gebruikersnaam = $_POST['username'];
+    $wachtwoord = $_POST['password'];
 
-    // Gebruiker ophalen op basis van gebruikersnaam
-    $sql = "SELECT * FROM `gebruikers` WHERE `gebruikersnaam` = :username";
-    $statement = $conn->prepare($sql);
-    $statement->bindParam(':username', $_POST['username']);
-    $statement->execute();
-    $gebruiker = $statement->fetch();
+    $sql = "SELECT * FROM gebruikers WHERE gebruikersnaam = :username";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':username', $gebruikersnaam);
+    $stmt->execute();
+    $gebruiker = $stmt->fetch();
 
-    // Als gebruiker bestaat, controleer wachtwoord
-    if ($gebruiker && password_verify($_POST['password'], $gebruiker['wachtwoord'])) {
-        $_SESSION['admin'] = true;
-        header("Location: admin.php");
+    if ($gebruiker && password_verify($wachtwoord, $gebruiker['wachtwoord'])) {
+        $_SESSION['gebruiker_id'] = $gebruiker['id'];
+        $_SESSION['gebruikersnaam'] = $gebruiker['gebruikersnaam'];
+        header("Location: account.php");
         exit;
     } else {
         $incorrectlogin = true;
-        echo "Ongeldige gebruikersnaam of wachtwoord.";
     }
-} catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
 }
 ?>
+
 
 
 
@@ -45,9 +44,10 @@ try {
     <a class="logo" href="index.html"><img src="images/logo.png" alt="JMLogo"></a>
     <nav>
         <ul class="nav-links">
-            <li><a href="booking.html">booking</a></li>
+            <li><a href="booking.php">booking</a></li>
             <li><a href="contact.html">Vragen & contact</a></li>
             <li><a href="overons.html">Over ons</a></li>
+            <a href="logout.php">Uitloggen</a>
         </ul>
     </nav>
     <a href="login.html">  <div><img class="login-image" src="images/account-black.png" alt="login"></div> </a>
@@ -66,6 +66,7 @@ try {
             <button type="submit" class="login-btn">Inloggen</button>
         </form>
         <p class="register-link">Nog geen account? <a href="registratie.php">Registreer hier</a></p>
+        <p class="register-link"> Wachtwoord vergeten? <a href="wachtwoord_vergeten.php">Klik hier</a></p>
     </div>
 </section>
 

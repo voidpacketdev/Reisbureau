@@ -20,6 +20,7 @@
             <a href="booking.html">Booking</a>
             <a href="contact.html">Vragen & Contact</a>
             <a href="overons.html">Over ons</a>
+            <a href="logout.php">Uitloggen</a>
         </div>
 
         <div class="login-parent">
@@ -50,48 +51,40 @@
         <button type="submit" class="zoekknop">Toon vakanties</button>
     </form>
 </div>
-    <div class="landen-kaarten">
+<div class="landen-kaarten">
 
-        <div class="kaart">
-            <img class="kaart-afbeelding" src="images/frankrijk.png" alt="Frankrijk">
-            <div class="kaart-inhoud">
-                <div class="kaart-naam">Frankrijk</div>
-                <div class="kaart-locatie">Nice, Côte d'Azur</div>
-                <div class="kaart-prijs">Vanaf €549 p.p.</div>
-                <button class="kaart-button">Ontdek</button>
-            </div>
+    <div class="kaart">
+        <img class="kaart-afbeelding" src="images/vakanties/griekeland.png" alt="Griekenland">
+        <div class="kaart-inhoud">
+            <div class="kaart-naam">Griekenland</div>
+            <div class="kaart-locatie">Kreta, Piskopiano</div>
+            <div class="kaart-prijs">Vanaf €518 p.p.</div>
+            <div action="boeken.php" method="POST">
+                <?php
+
+                $conn = new PDO("mysql:host=mysql_db2;dbname=login_systeem", "root", "rootpassword");
+                $reizen = $conn->query("SELECT * FROM reizen")->fetchAll();
+                foreach ($reizen as $reis) {
+                    echo '
+    <div class="kaart">
+        <img class="kaart-afbeelding" src="images/vakanties/' . htmlspecialchars($reis["foto"]) . '" alt="' . htmlspecialchars($reis["bestemming"]) . '">
+        <div class="kaart-inhoud">
+            <div class="kaart-naam">' . htmlspecialchars($reis["bestemming"]) . '</div>
+            <div class="kaart-locatie">' . htmlspecialchars($reis["verblijf"]) . '</div>
+            <div class="kaart-prijs">€' . htmlspecialchars($reis["prijs"]) . '</div>
+        <a href="boeken.php?id=' . $reis["id"] . '"><button class="kaart-button">Boek</button></a>
         </div>
+    </div>';
+                }
 
-        <div class="kaart">
-            <img class="kaart-afbeelding" src="images/croatie.png" alt="Croatië">
-            <div class="kaart-inhoud">
-                <div class="kaart-naam">Croatië</div>
-                <div class="kaart-locatie">Split, Bačvice Beach</div>
-                <div class="kaart-prijs">Vanaf €439 p.p.</div>
-                <button class="kaart-button">Ontdek</button>
-            </div>
-        </div>
 
-        <div class="kaart">
-            <img class="kaart-afbeelding" src="images/brazilie.png" alt="Brazilië">
-            <div class="kaart-inhoud">
-                <div class="kaart-naam">Brazilië</div>
-                <div class="kaart-locatie">Rio de Janeiro, Copacabana</div>
-                <div class="kaart-prijs">Vanaf €899 p.p.</div>
-                <button class="kaart-button">Ontdek</button>
+                ?>
             </div>
-        </div>
 
-        <div class="kaart">
-            <img class="kaart-afbeelding" src="images/griekeland.png" alt="Griekenland">
-            <div class="kaart-inhoud">
-                <div class="kaart-naam">Griekenland</div>
-                <div class="kaart-locatie">Kreta, Piskopiano</div>
-                <div class="kaart-prijs">Vanaf €518 p.p.</div>
-                <button class="kaart-button">Ontdek</button>
-            </div>
+
         </div>
     </div>
+</div>
 </div>
 
 <footer>
@@ -108,8 +101,6 @@
         </div>
     </div>
 </footer>
-
-
 
 
 </body>

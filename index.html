@@ -17,14 +17,22 @@
             <a href="index.html"><img src="images/logo.png" alt="JMLogo"></a>
         </div>
         <div class="navigatie">
-            <a href="booking.html">Booking</a>
+            <a href="booking.php">Booking</a>
             <a href="contact.html">Vragen & Contact</a>
             <a href="overons.html">Over ons</a>
+            <a href="logout.php">Uitloggen</a>
         </div>
 
         <div class="login-parent">
-            <div><img class="search-image" src="images/search.png" alt="search"></div>
-            <a href="login.php">  <div><img class="login-image" src="images/account.png" alt="login"></div> </a>
+            <form action="zoeken.php" method="get">
+                <input type="text" name="zoekwoord" placeholder="Zoek vakanties...">
+                <button type="submit">Zoeken</button>
+            </form>
+
+
+            <a href="login.php">
+                <div><img class="login-image" src="images/account.png" alt="login"></div>
+            </a>
         </div>
     </nav>
     <form class="zoekbalk">
@@ -52,16 +60,16 @@
 </div>
 
 <div class="landen-parent">
-    <div><img class="reizen-images" src="images/griekeland.png" alt="griekeland">
+    <div><img class="reizen-images" src="images/vakanties/griekeland.png" alt="griekeland">
         <div class="landen">Griekenland</div>
     </div>
-    <div><img class="reizen-images" src="images/brazilie.png" alt="brazilie">
+    <div><img class="reizen-images" src="images/vakanties/brazilie.png" alt="brazilie">
         <div class="landen">Brazilië</div>
     </div>
-    <div><img class="reizen-images" src="images/croatie.png" alt="croatie">
+    <div><img class="reizen-images" src="images/vakanties/croatie.png" alt="croatie">
         <div class="landen">Croatie</div>
     </div>
-    <div><img class="reizen-images" src="images/frankrijk.png" alt="frankrijk">
+    <div><img class="reizen-images" src="images/vakanties/frankrijk.png" alt="frankrijk">
         <div class="landen">Frankrijk</div>
     </div>
 </div>
@@ -87,7 +95,6 @@
         Vragen?
     </div>
 </div>
-
 
 
 <div class="main-content">

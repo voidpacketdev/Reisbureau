@@ -50,9 +50,10 @@ try {
     <a class="logo" href="index.html"><img src="images/logo.png" alt="JMLogo"></a>
     <nav>
         <ul class="nav-links">
-            <li><a href="booking.html">booking</a></li>
+            <li><a href="booking.php">booking</a></li>
             <li><a href="contact.html">Vragen & contact</a></li>
             <li><a href="overons.html">Over ons</a></li>
+            <a href="logout.php">Uitloggen</a>
         </ul>
     </nav>
     <a href="login.html">  <div><img class="login-image" src="images/account-black.png" alt="login"></div> </a>

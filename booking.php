@@ -55,7 +55,7 @@
 
 
         <?php
-        $conn = new PDO("mysql:host=mysql_db2;dbname=login_systeem", "root", "rootpassword");
+        $conn = new PDO("mysql:host=mysql_db2;dbname=reisbureau", "root", "rootpassword");
         $reizen = $conn->query("SELECT * FROM reizen")->fetchAll();
 
         foreach ($reizen as $reis) {

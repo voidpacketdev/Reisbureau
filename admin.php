@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start(); // Zorgt dat header() geen fouten geeft als er output is
 
 // Alleen admins mogen deze pagina bekijken
 if (!isset($_SESSION["gebruiker_id"]) || $_SESSION["rol"] !== 'admin') {
@@ -9,7 +10,25 @@ if (!isset($_SESSION["gebruiker_id"]) || $_SESSION["rol"] !== 'admin') {
 
 $conn = new PDO("mysql:host=mysql_db2;dbname=reisbureau", "root", "rootpassword");
 
-// Toevoegen
+// Contactbericht markeren als gelezen
+if (isset($_GET["gelezen"])) {
+    $id = $_GET["gelezen"];
+    $stmt = $conn->prepare("UPDATE contactberichten SET gelezen = 1 WHERE id = ?");
+    $stmt->execute([$id]);
+    header("Location: admin.php");
+    exit;
+}
+
+// Contactbericht verwijderen
+if (isset($_GET["verwijder_bericht"])) {
+    $id = $_GET["verwijder_bericht"];
+    $stmt = $conn->prepare("DELETE FROM contactberichten WHERE id = ?");
+    $stmt->execute([$id]);
+    header("Location: admin.php");
+    exit;
+}
+
+// Reizenbeheer acties
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["toevoegen"])) {
     $bestemming = $_POST["bestemming"];
     $verblijf = $_POST["verblijf"];
@@ -23,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["toevoegen"])) {
     exit;
 }
 
-// Wijzigen
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["update"])) {
     $id = $_POST["id"];
     $bestemming = $_POST["bestemming"];
@@ -38,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["update"])) {
     exit;
 }
 
-// Verwijderen
 if (isset($_GET["verwijder"])) {
     $id = $_GET["verwijder"];
     $stmt = $conn->prepare("DELETE FROM reizen WHERE id = ?");
@@ -48,6 +65,7 @@ if (isset($_GET["verwijder"])) {
 }
 
 $reizen = $conn->query("SELECT * FROM reizen")->fetchAll();
+$berichten = $conn->query("SELECT * FROM contactberichten ORDER BY datum DESC")->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -58,17 +76,89 @@ $reizen = $conn->query("SELECT * FROM reizen")->fetchAll();
     <link rel="stylesheet" href="/css/index-styling.css">
     <link rel="stylesheet" href="css/booking-styling.css">
     <style>
-        form, table { margin: 20px auto; width: 90%; }
-        table { border-collapse: collapse; }
-        th, td { border: 1px solid #ccc; padding: 8px; vertical-align: top; }
-        th { background-color: #f4f4f4; }
-        textarea { width: 100%; }
-        input[type="text"], input[type="number"] { width: 100%; }
+        form, table {
+            margin: 20px auto;
+            width: 90%;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        textarea {
+            width: 100%;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+        }
+
+        .bericht-container {
+            margin: 20px auto;
+            width: 90%;
+            background-color: #f2f2f2;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .bericht-container.gelezen {
+            background-color: #d4f7d4;
+        }
+
+        .bericht-buttons {
+            margin-top: 10px;
+        }
+
+        .bericht-buttons a {
+            margin-right: 10px;
+            text-decoration: none;
+            padding: 5px 10px;
+            background-color: #387aff;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .bericht-buttons a.verwijder {
+            background-color: #ff4c4c;
+        }
+
+        .bericht-buttons a:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
 
-<h1>Adminpaneel: Reizen beheren</h1>
+<h1>Adminpaneel</h1>
+
+<h2>Contactberichten</h2>
+<?php foreach ($berichten as $bericht): ?>
+    <div class="bericht-container <?= $bericht["gelezen"] ? "gelezen" : "" ?>">
+        <p><strong>Naam:</strong> <?= htmlspecialchars($bericht["naam"]) ?></p>
+        <p><strong>Email:</strong> <?= htmlspecialchars($bericht["email"]) ?></p>
+        <p><strong>Telefoon:</strong> <?= htmlspecialchars($bericht["telefoon"]) ?></p>
+        <p><strong>Bericht:</strong><br><?= nl2br(htmlspecialchars($bericht["bericht"])) ?></p>
+        <p><strong>Datum:</strong> <?= $bericht["datum"] ?></p>
+        <div class="bericht-buttons">
+            <?php if (!$bericht["gelezen"]): ?>
+                <a href="admin.php?gelezen=<?= $bericht["id"] ?>">Markeer als gelezen</a>
+            <?php endif; ?>
+            <a class="verwijder" href="admin.php?verwijder_bericht=<?= $bericht["id"] ?>" onclick="return confirm('Weet je zeker dat je dit bericht wilt verwijderen?')">Verwijder</a>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+<hr>
 
 <h2>Nieuwe reis toevoegen</h2>
 <form method="post">

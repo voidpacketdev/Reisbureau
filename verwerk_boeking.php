@@ -4,7 +4,7 @@ if (!isset($_SESSION['gebruiker_id'])) {
     header('Location: login.php');
     exit;
 }
-$conn = new PDO("mysql:host=mysql_db2;dbname=login_systeem", "root", "rootpassword");
+$conn = new PDO("mysql:host=mysql_db2;dbname=reisbureau", "root", "rootpassword");
 
 $reis_id = $_POST['reis_id'];
 $gebruiker_id = $_SESSION['gebruiker_id'];

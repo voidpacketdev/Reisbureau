@@ -4,7 +4,7 @@ $username = "root";
 $password = "rootpassword";
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=login_systeem", $username, $password);
+    $conn = new PDO("mysql:host=$servername;dbname=reisbureau", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Check of formulier verzonden is

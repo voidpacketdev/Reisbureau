@@ -1,6 +1,6 @@
 <?php
 session_start();
-$pdo = new PDO("mysql:host=mysql_db2;dbname=login_systeem", "root", "rootpassword");
+include("connection.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $gebruikersnaam = $_POST['username'];

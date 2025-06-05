@@ -5,7 +5,7 @@ if (!isset($_SESSION["gebruiker_id"])) {
     exit;
 }
 
-$conn = new PDO("mysql:host=mysql_db2;dbname=login_systeem", "root", "rootpassword");
+$conn = new PDO("mysql:host=mysql_db2;dbname=reisbureau", "root", "rootpassword");
 
 if (isset($_POST["boek"])) {
     // Boeking verwerken

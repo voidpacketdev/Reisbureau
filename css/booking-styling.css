@@ -115,3 +115,9 @@ footer{
     margin-top: 50px;
 }
 
+.kaart-beschrijving {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.4;
+}

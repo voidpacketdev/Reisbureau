@@ -53,32 +53,25 @@
 </div>
 <div class="landen-kaarten">
 
-    <div class="kaart">
-        <img class="kaart-afbeelding" src="images/vakanties/griekeland.png" alt="Griekenland">
-        <div class="kaart-inhoud">
-            <div class="kaart-naam">Griekenland</div>
-            <div class="kaart-locatie">Kreta, Piskopiano</div>
-            <div class="kaart-prijs">Vanaf €518 p.p.</div>
-            <div action="boeken.php" method="POST">
-                <?php
 
-                $conn = new PDO("mysql:host=mysql_db2;dbname=login_systeem", "root", "rootpassword");
-                $reizen = $conn->query("SELECT * FROM reizen")->fetchAll();
-                foreach ($reizen as $reis) {
-                    echo '
-    <div class="kaart">
-        <img class="kaart-afbeelding" src="images/vakanties/' . htmlspecialchars($reis["foto"]) . '" alt="' . htmlspecialchars($reis["bestemming"]) . '">
-        <div class="kaart-inhoud">
-            <div class="kaart-naam">' . htmlspecialchars($reis["bestemming"]) . '</div>
-            <div class="kaart-locatie">' . htmlspecialchars($reis["verblijf"]) . '</div>
-            <div class="kaart-prijs">€' . htmlspecialchars($reis["prijs"]) . '</div>
-        <a href="boeken.php?id=' . $reis["id"] . '"><button class="kaart-button">Boek</button></a>
-        </div>
-    </div>';
-                }
+        <?php
+        $conn = new PDO("mysql:host=mysql_db2;dbname=login_systeem", "root", "rootpassword");
+        $reizen = $conn->query("SELECT * FROM reizen")->fetchAll();
 
-
-                ?>
+        foreach ($reizen as $reis) {
+            echo '
+        <div class="kaart">
+            <img class="kaart-afbeelding" src="images/vakanties/' . htmlspecialchars($reis["foto"]) . '" alt="' . htmlspecialchars($reis["bestemming"]) . '">
+            <div class="kaart-inhoud">
+                <div class="kaart-naam">' . htmlspecialchars($reis["bestemming"]) . '</div>
+                <div class="kaart-locatie">' . htmlspecialchars($reis["verblijf"]) . '</div>
+                <div class="kaart-prijs">€' . htmlspecialchars($reis["prijs"]) . ' p.p.</div>
+                <p class="kaart-beschrijving">' . nl2br(htmlspecialchars($reis["beschrijving"])) . '</p>
+                <a href="boeken.php?id=' . $reis["id"] . '"><button class="kaart-button">Boek</button></a>
+            </div>
+        </div>';
+        }
+        ?>
             </div>
 
 

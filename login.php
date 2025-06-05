@@ -1,18 +1,12 @@
 <?php
 session_start();
-
-$servername = "mysql_db2";
-$username = "root";
-$password = "rootpassword";
-$conn = new PDO("mysql:host=$servername;dbname=login_systeem", $username, $password);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo = new PDO("mysql:host=mysql_db2;dbname=login_systeem", "root", "rootpassword");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $gebruikersnaam = $_POST['username'];
     $wachtwoord = $_POST['password'];
 
-    $sql = "SELECT * FROM gebruikers WHERE gebruikersnaam = :username";
-    $stmt = $conn->prepare($sql);
+    $stmt = $pdo->prepare("SELECT * FROM gebruikers WHERE gebruikersnaam = :username");
     $stmt->bindParam(':username', $gebruikersnaam);
     $stmt->execute();
     $gebruiker = $stmt->fetch();
@@ -20,13 +14,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($gebruiker && password_verify($wachtwoord, $gebruiker['wachtwoord'])) {
         $_SESSION['gebruiker_id'] = $gebruiker['id'];
         $_SESSION['gebruikersnaam'] = $gebruiker['gebruikersnaam'];
-        header("Location: account.php");
+        $_SESSION['rol'] = $gebruiker['rol'];
+
+        if ($gebruiker['rol'] === 'admin') {
+            header("Location: admin.php");
+        } else {
+            header("Location: account.php");
+        }
         exit;
     } else {
         $incorrectlogin = true;
     }
 }
 ?>
+
+
 
 
 
@@ -50,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <a href="logout.php">Uitloggen</a>
         </ul>
     </nav>
-    <a href="login.html">  <div><img class="login-image" src="images/account-black.png" alt="login"></div> </a>
+    <a href="login.php">  <div><img class="login-image" src="images/account-black.png" alt="login"></div> </a>
 </header>
 
 <section class="login-container">

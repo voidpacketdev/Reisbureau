@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/index-styling.css">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/index-styling.css">
     <link rel="stylesheet" href="css/booking-styling.css">
+    <title>Document</title>
 </head>
-
 <body>
 
 <div class="background">
@@ -17,24 +17,20 @@
             <a href="index.html"><img src="images/logo.png" alt="JMLogo"></a>
         </div>
         <div class="navigatie">
-            <a href="booking.php">Booking</a>
+            <a href="booking.html">Booking</a>
             <a href="contact.html">Vragen & Contact</a>
             <a href="overons.html">Over ons</a>
             <a href="logout.php">Uitloggen</a>
         </div>
 
         <div class="login-parent">
-            <form action="zoeken.php" method="get">
-                <input type="text" name="zoekwoord" placeholder="Zoek vakanties...">
-                <button type="submit">Zoeken</button>
-            </form>
-
-
+            <div><img class="search-image" src="images/search.png" alt="search"></div>
             <a href="login.php">
                 <div><img class="login-image" src="images/account.png" alt="login"></div>
             </a>
         </div>
     </nav>
+
     <form class="zoekbalk">
         <input class="zoekveld" type="text" name="bestemming" placeholder="Bestemming">
         <input class="zoekveld" type="date" name="datum">
@@ -55,50 +51,33 @@
         <button type="submit" class="zoekknop">Toon vakanties</button>
     </form>
 </div>
-<div class="reizen-parent">
-    <div class="reizen">Onze populairste reizen</div>
-</div>
+<div class="landen-kaarten">
 
-<div class="landen-parent">
-    <div><img class="reizen-images" src="images/vakanties/griekeland.png" alt="griekeland">
-        <div class="landen">Griekenland</div>
-    </div>
-    <div><img class="reizen-images" src="images/vakanties/brazilie.png" alt="brazilie">
-        <div class="landen">Brazilië</div>
-    </div>
-    <div><img class="reizen-images" src="images/vakanties/croatie.png" alt="croatie">
-        <div class="landen">Croatie</div>
-    </div>
-    <div><img class="reizen-images" src="images/vakanties/frankrijk.png" alt="frankrijk">
-        <div class="landen">Frankrijk</div>
-    </div>
-</div>
 
-<div class="garanties">
-    ONZE GARANTIE
-</div>
-<div class="verzekeringen">
-    <div class="card">
-        <div class="baggage icon"></div>
-        verzekering regelen
-    </div>
-    <div class="card">
-        <div class="verified icon"></div>
-        Vakantiegarantie
-    </div>
-    <div class="card">
-        <div class="exportplus icon"></div>
-        Extra service
-    </div>
-    <div class="card">
-        <div class="vragen icon"></div>
-        Vragen?
+        <?php
+        $conn = new PDO("mysql:host=mysql_db2;dbname=login_systeem", "root", "rootpassword");
+        $reizen = $conn->query("SELECT * FROM reizen")->fetchAll();
+
+        foreach ($reizen as $reis) {
+            echo '
+        <div class="kaart">
+            <img class="kaart-afbeelding" src="images/vakanties/' . htmlspecialchars($reis["foto"]) . '" alt="' . htmlspecialchars($reis["bestemming"]) . '">
+            <div class="kaart-inhoud">
+                <div class="kaart-naam">' . htmlspecialchars($reis["bestemming"]) . '</div>
+                <div class="kaart-locatie">' . htmlspecialchars($reis["verblijf"]) . '</div>
+                <div class="kaart-prijs">€' . htmlspecialchars($reis["prijs"]) . ' p.p.</div>
+                <p class="kaart-beschrijving">' . nl2br(htmlspecialchars($reis["beschrijving"])) . '</p>
+                <a href="boeken.php?id=' . $reis["id"] . '"><button class="kaart-button">Boek</button></a>
+            </div>
+        </div>';
+        }
+        ?>
+            </div>
+
+
+        </div>
     </div>
 </div>
-
-
-<div class="main-content">
-
 </div>
 
 <footer>
@@ -115,6 +94,7 @@
         </div>
     </div>
 </footer>
-</body>
 
+
+</body>
 </html>

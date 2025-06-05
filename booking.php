@@ -1,3 +1,10 @@
+<?php
+// Connectie maken en recensies ophalen
+$conn = new PDO("mysql:host=mysql_db2;dbname=reisbureau", "root", "rootpassword");
+$recensies = $conn->query("SELECT * FROM recensies ORDER BY datum DESC LIMIT 10")->fetchAll();
+?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -79,6 +86,41 @@
     </div>
 </div>
 </div>
+
+<?php
+$conn = new PDO("mysql:host=mysql_db2;dbname=login_systeem", "root", "rootpassword");
+$recensies = $conn->query("SELECT * FROM recensies ORDER BY datum DESC LIMIT 10")->fetchAll();
+?>
+
+
+<h2>Recensies van bezoekers</h2>
+
+<?php if (isset($_GET['bericht']) && $_GET['bericht'] === 'bedankt'): ?>
+    <p style="color:green;">Bedankt voor je recensie!</p>
+<?php endif; ?>
+
+<?php foreach ($recensies as $recensie): ?>
+    <div class="recensie">
+        <strong><?= htmlspecialchars($recensie['naam']) ?></strong>
+        (<?= date('d-m-Y', strtotime($recensie['datum'])) ?>)<br>
+        <p><?= nl2br(htmlspecialchars($recensie['recensie'])) ?></p>
+    </div>
+<?php endforeach; ?>
+
+<h2>Laat een recensie achter</h2>
+<form method="post" action="recensie_verwerken.php">
+    <label>Naam:<br><input type="text" name="naam" required></label><br>
+    <label>Email:<br><input type="email" name="email" required></label><br>
+    <label>Recensie:<br><textarea name="recensie" rows="5" required></textarea></label><br>
+    <button type="submit">Verstuur recensie</button>
+</form>
+
+
+
+</body>
+</html>
+
+
 
 <footer>
     <a href="contact.html">Vragen & Contact</a>

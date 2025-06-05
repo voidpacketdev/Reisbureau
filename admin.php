@@ -7,7 +7,7 @@ if (!isset($_SESSION["gebruiker_id"]) || $_SESSION["rol"] !== 'admin') {
     exit;
 }
 
-$conn = new PDO("mysql:host=mysql_db2;dbname=login_systeem", "root", "rootpassword");
+$conn = new PDO("mysql:host=mysql_db2;dbname=reisbureau", "root", "rootpassword");
 
 // Toevoegen
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["toevoegen"])) {

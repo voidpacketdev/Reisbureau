@@ -1,6 +1,6 @@
 <?php
 session_start();
-$pdo = new PDO("mysql:host=mysql_db2;dbname=login_systeem", "root", "rootpassword");
+$pdo = new PDO("mysql:host=mysql_db2;dbname=reisbureau", "root", "rootpassword");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $gebruikersnaam = $_POST['username'];

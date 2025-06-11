@@ -51,6 +51,6 @@ try {
     <button type="submit">Wachtwoord resetten</button>
 </form>
 
-<a href="index.html">klik hier om terug te gaan naar hoofdpagina</a>
+<a href="index.php">klik hier om terug te gaan naar hoofdpagina</a>
 </body>
 </html>

@@ -28,7 +28,7 @@ if (isset($_GET['zoekwoord']) && !empty($_GET['zoekwoord'])) {
 <div class="background">
     <nav>
         <div>
-            <a href="index.html"><img src="images/logo.png" alt="JMLogo"></a>
+            <a href="index.php"><img src="images/logo.png" alt="JMLogo"></a>
         </div>
         <div class="navigatie">
             <a href="booking.php">Booking</a>

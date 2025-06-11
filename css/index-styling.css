@@ -303,3 +303,69 @@ nav {
 .boekingen{
     margin-top: 200px;
 }
+
+.nav-zoekbalk {
+color: white;
+    gap: 8px;
+}
+
+.nav-zoekveld {
+    padding: 6px 12px;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    min-width: 160px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    color: white;
+}
+
+.nav-zoekveld:focus {
+    border-color: #00bcd4;
+    box-shadow: 0 0 5px rgba(0, 188, 212, 0.3);
+    outline: none;
+}
+
+.nav-zoekknop {
+    padding: 6px 12px;
+    background-color: #00bcd4;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-zoekknop:hover {
+    background-color: #0097a7;
+}
+
+.recensie-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.recensie-form input,
+.recensie-form textarea {
+    padding: 5px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.recensie-form button {
+    width: fit-content;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.recensie {
+    background-color: #f3f3f3;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+}

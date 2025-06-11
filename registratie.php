@@ -47,7 +47,7 @@ try {
 </head>
 <body>
 <header class="main-header">
-    <a class="logo" href="index.html"><img src="images/logo.png" alt="JMLogo"></a>
+    <a class="logo" href="index.php"><img src="images/logo.png" alt="JMLogo"></a>
     <nav>
         <ul class="nav-links">
             <li><a href="booking.php">booking</a></li>

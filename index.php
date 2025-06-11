@@ -1,3 +1,34 @@
+<?php
+$conn = new PDO("mysql:host=mysql_db2;dbname=reisbureau", "root", "rootpassword");
+
+$where = [];
+$params = [];
+
+if (!empty($_GET['bestemming'])) {
+    $where[] = "bestemming LIKE ?";
+    $params[] = '%' . $_GET['bestemming'] . '%';
+}
+
+if (!empty($_GET['hoelang'])) {
+    $where[] = "beschrijving LIKE ?";
+    $params[] = '%' . $_GET['hoelang'] . ' dagen%';
+}
+
+if (!empty($_GET['personen'])) {
+    $where[] = "beschrijving LIKE ?";
+    $params[] = '%' . $_GET['personen'] . ' persoon%';
+}
+
+$query = "SELECT * FROM reizen";
+if (!empty($where)) {
+    $query .= " WHERE " . implode(" AND ", $where);
+}
+
+$stmt = $conn->prepare($query);
+$stmt->execute($params);
+$reizen = $stmt->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +45,7 @@
 <div class="background">
     <nav>
         <div>
-            <a href="index.html"><img src="images/logo.png" alt="JMLogo"></a>
+            <a href="index.php"><img src="images/logo.png" alt="JMLogo"></a>
         </div>
         <div class="navigatie">
             <a href="booking.php">Booking</a>
@@ -24,19 +55,20 @@
         </div>
 
         <div class="login-parent">
-            <form action="zoeken.php" method="get">
-                <input type="text" name="zoekwoord" placeholder="Zoek vakanties...">
-                <button type="submit">Zoeken</button>
+            <form action="zoeken.php" method="get" class="nav-zoekbalk">
+                <input type="text" name="zoekwoord" placeholder="Zoek vakanties..." class="nav-zoekveld">
+                <button type="submit" class="nav-zoekknop">Zoeken</button>
             </form>
-
 
             <a href="login.php">
                 <div><img class="login-image" src="images/account.png" alt="login"></div>
             </a>
         </div>
+
     </nav>
-    <form class="zoekbalk">
-        <input class="zoekveld" type="text" name="bestemming" placeholder="Bestemming">
+    <form class="zoekbalk" method="get" action="">
+
+    <input class="zoekveld" type="text" name="bestemming" placeholder="Bestemming">
         <input class="zoekveld" type="date" name="datum">
         <select class="zoekveld" name="hoelang">
             <option value="">Hoelang</option>
@@ -59,20 +91,26 @@
     <div class="reizen">Onze populairste reizen</div>
 </div>
 
-<div class="landen-parent">
-    <div><img class="reizen-images" src="images/vakanties/griekeland.png" alt="griekeland">
-        <div class="landen">Griekenland</div>
-    </div>
-    <div><img class="reizen-images" src="images/vakanties/brazilie.png" alt="brazilie">
-        <div class="landen">Brazilië</div>
-    </div>
-    <div><img class="reizen-images" src="images/vakanties/croatie.png" alt="croatie">
-        <div class="landen">Croatie</div>
-    </div>
-    <div><img class="reizen-images" src="images/vakanties/frankrijk.png" alt="frankrijk">
-        <div class="landen">Frankrijk</div>
-    </div>
+<div class="landen-kaarten">
+    <?php if (!empty($reizen)): ?>
+        <?php foreach ($reizen as $reis): ?>
+            <div class="kaart">
+                <img class="kaart-afbeelding" src="images/vakanties/<?= htmlspecialchars($reis["foto"]) ?>" alt="<?= htmlspecialchars($reis["bestemming"]) ?>">
+                <div class="kaart-inhoud">
+                    <div class="kaart-naam"><?= htmlspecialchars($reis["bestemming"]) ?></div>
+                    <div class="kaart-locatie"><?= htmlspecialchars($reis["verblijf"]) ?></div>
+                    <div class="kaart-prijs">€<?= htmlspecialchars($reis["prijs"]) ?> p.p.</div>
+                    <p class="kaart-beschrijving"><?= nl2br(htmlspecialchars($reis["beschrijving"])) ?></p>
+                    <a href="boeken.php?id=<?= $reis["id"] ?>"><button class="kaart-button">Boek</button></a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php elseif ($_GET): ?>
+        <p style="text-align: center;">Geen reizen gevonden die aan je zoekcriteria voldoen.</p>
+    <?php endif; ?>
 </div>
+
+
 
 <div class="garanties">
     ONZE GARANTIE

@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,25 +16,30 @@
 <div class="background">
     <nav>
         <div>
-            <a href="index.html"><img src="images/logo.png" alt="JMLogo"></a>
+            <a href="index.php"><img src="images/logo.png" alt="JMLogo"></a>
         </div>
         <div class="navigatie">
-            <a href="booking.html">Booking</a>
+            <a href="booking.php">Booking</a>
             <a href="contact.html">Vragen & Contact</a>
             <a href="overons.html">Over ons</a>
             <a href="logout.php">Uitloggen</a>
         </div>
 
         <div class="login-parent">
-            <div><img class="search-image" src="images/search.png" alt="search"></div>
+            <form action="zoeken.php" method="get" class="nav-zoekbalk">
+                <input type="text" name="zoekwoord" placeholder="Zoek vakanties..." class="nav-zoekveld">
+                <button type="submit" class="nav-zoekknop">Zoeken</button>
+            </form>
+
             <a href="login.php">
                 <div><img class="login-image" src="images/account.png" alt="login"></div>
             </a>
         </div>
     </nav>
 
-    <form class="zoekbalk">
-        <input class="zoekveld" type="text" name="bestemming" placeholder="Bestemming">
+    <form class="zoekbalk" method="get" action="">
+
+    <input class="zoekveld" type="text" name="bestemming" placeholder="Bestemming">
         <input class="zoekveld" type="date" name="datum">
         <select class="zoekveld" name="hoelang">
             <option value="">Hoelang</option>
@@ -56,7 +63,33 @@
 
         <?php
         $conn = new PDO("mysql:host=mysql_db2;dbname=reisbureau", "root", "rootpassword");
-        $reizen = $conn->query("SELECT * FROM reizen")->fetchAll();
+        $where = [];
+        $params = [];
+
+        if (!empty($_GET['bestemming'])) {
+            $where[] = "bestemming LIKE ?";
+            $params[] = '%' . $_GET['bestemming'] . '%';
+        }
+
+        if (!empty($_GET['hoelang'])) {
+            $where[] = "beschrijving LIKE ?"; // of maak hier een aparte kolom voor in de toekomst
+            $params[] = '%' . $_GET['hoelang'] . ' dagen%';
+        }
+
+        if (!empty($_GET['personen'])) {
+            $where[] = "beschrijving LIKE ?"; // eventueel kolom `capaciteit` toevoegen
+            $params[] = '%' . $_GET['personen'] . ' persoon%';
+        }
+
+        $query = "SELECT * FROM reizen";
+        if (!empty($where)) {
+            $query .= " WHERE " . implode(" AND ", $where);
+        }
+
+        $stmt = $conn->prepare($query);
+        $stmt->execute($params);
+        $reizen = $stmt->fetchAll();
+
 
         foreach ($reizen as $reis) {
             echo '
@@ -68,8 +101,29 @@
                 <div class="kaart-prijs">€' . htmlspecialchars($reis["prijs"]) . ' p.p.</div>
                 <p class="kaart-beschrijving">' . nl2br(htmlspecialchars($reis["beschrijving"])) . '</p>
                 <a href="boeken.php?id=' . $reis["id"] . '"><button class="kaart-button">Boek</button></a>
+<a href="recensie_toevoegen.php?id=' . $reis["id"] . '"><button class="kaart-button">Plaats recensie</button></a>
+
             </div>
         </div>';
+            $recensieStmt = $conn->prepare("SELECT * FROM recensies WHERE reis_id = ?");
+            $recensieStmt->execute([$reis["id"]]);
+            $recensies = $recensieStmt->fetchAll();
+
+            echo '<div class="recensies">';
+            echo '<h4>Recensies:</h4>';
+            if ($recensies) {
+                foreach ($recensies as $r) {
+                    echo '<div class="recensie">';
+                    echo '<strong>' . htmlspecialchars($r["naam"]) . '</strong> op ' . date("d-m-Y H:i", strtotime($r["datum"])) . '<br>';
+                    echo isset($r["recensie"]) ? htmlspecialchars($r["recensie"]) : "Geen recensie";
+
+                    echo '</div><hr>';
+                }
+            } else {
+                echo 'Nog geen recensies.';
+            }
+            echo '</div>';
+
         }
         ?>
             </div>

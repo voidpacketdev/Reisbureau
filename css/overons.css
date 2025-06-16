@@ -1,0 +1,20 @@
+body {
+    background-color: #f7f7f7;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+
+h1, h2 {
+    color: #0056b3;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul li::before {
+    content: "✓ ";
+    color: green;
+    margin-right: 8px;
+}

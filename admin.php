@@ -59,7 +59,17 @@ if (isset($_GET["verwijder"])) {
 }
 
 $berichten = $conn->query("SELECT * FROM contactberichten ORDER BY datum DESC")->fetchAll();
-$reizen = $conn->query("SELECT * FROM reizen ORDER BY id DESC")->fetchAll();
+$reizen = [];
+
+if (!empty($_GET["zoek"])) {
+    $zoek = '%' . $_GET["zoek"] . '%';
+    $stmt = $conn->prepare("SELECT * FROM reizen WHERE bestemming LIKE ? OR verblijf LIKE ? OR beschrijving LIKE ? ORDER BY id DESC");
+    $stmt->execute([$zoek, $zoek, $zoek]);
+    $reizen = $stmt->fetchAll();
+} else {
+    $reizen = $conn->query("SELECT * FROM reizen ORDER BY id DESC")->fetchAll();
+}
+
 ?>
 
 <!doctype html>
@@ -81,7 +91,7 @@ $reizen = $conn->query("SELECT * FROM reizen ORDER BY id DESC")->fetchAll();
     <h1 class="text-center mb-4">Adminpaneel</h1>
 
     <!-- Contactberichten -->
-    <div class="card mb-4" style="max-width:1000px; margin: 0 auto;">
+    <div class="card mb-4">
         <div class="card-header"><h2 class="h5 mb-0">Contactberichten</h2></div>
         <div class="card-body">
             <?php if (!$berichten): ?>
@@ -106,7 +116,7 @@ $reizen = $conn->query("SELECT * FROM reizen ORDER BY id DESC")->fetchAll();
     </div>
 
     <!-- Nieuwe reis toevoegen -->
-    <div class="container" style="max-width: 800px;">
+    <div class="container" >
         <div class="card mb-4 mx-auto">
             <div class="card-header">
                 <h2 class="h5 mb-0 text-center">Nieuwe reis toevoegen</h2>
@@ -137,9 +147,15 @@ $reizen = $conn->query("SELECT * FROM reizen ORDER BY id DESC")->fetchAll();
     </div>
 
     <!-- Bestaande reizen bewerken -->
-    <div class="card mb-4" style="max-width:1000px; margin: 0 auto;">
+    <div class="card mb-4">
         <div class="card-header"><h2 class="h5 mb-0">Bestaande reizen beheren</h2></div>
         <div class="card-body">
+            <form method="get" class="mb-3 d-flex justify-content-end" >
+                <input type="text" name="zoek" value="<?= isset($_GET["zoek"]) ? htmlspecialchars($_GET["zoek"]) : '' ?>"
+                       class="form-control me-2"  placeholder="Zoek op bestemming, verblijf of beschrijving">
+                <button type="submit" class="btn btn-primary">Zoek</button>
+            </form>
+
             <table class="table table-striped table-bordered align-middle">
                 <thead>
                 <tr>

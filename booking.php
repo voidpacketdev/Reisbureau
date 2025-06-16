@@ -115,7 +115,8 @@
                 foreach ($recensies as $r) {
                     echo '<div class="recensie">';
                     echo '<strong>' . htmlspecialchars($r["naam"]) . '</strong> op ' . date("d-m-Y H:i", strtotime($r["datum"])) . '<br>';
-                    echo nl2br(htmlspecialchars($r["beoordeling"]));
+                    echo isset($r["recensie"]) ? htmlspecialchars($r["recensie"]) : "Geen recensie";
+
                     echo '</div><hr>';
                 }
             } else {

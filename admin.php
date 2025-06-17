@@ -85,7 +85,7 @@ if (!empty($_GET["zoek"])) {
     <div class="navigatie">
         <a href="booking.php">Booking</a>
         <a href="contact.html">Vragen & Contact</a>
-        <a href="overons.html">Over ons</a>
+        <a href="overons.html">Over Ons</a>
         <a href="logout.php">Uitloggen</a>
     </div>
     <h1 class="text-center mb-4">Adminpaneel</h1>

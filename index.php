@@ -35,7 +35,7 @@ $reizen = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>J&M Travel | Home</title>
     <link rel="stylesheet" href="/css/index-styling.css">
     <link rel="stylesheet" href="css/booking-styling.css">
 </head>
@@ -118,7 +118,7 @@ $reizen = $stmt->fetchAll();
 <div class="verzekeringen">
     <div class="card">
         <div class="baggage icon"></div>
-        verzekering regelen
+        Verzekering regelen
     </div>
     <div class="card">
         <div class="verified icon"></div>

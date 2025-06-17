@@ -41,7 +41,7 @@ try {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>login</title>
+    <title>J&M Travel | Registratie</title>
     <link rel="stylesheet" href="css/index-styling.css">
     <link rel="stylesheet" href="css/login-styling.css">
 </head>
@@ -50,13 +50,12 @@ try {
     <a class="logo" href="index.php"><img src="images/logo.png" alt="JMLogo"></a>
     <nav>
         <ul class="nav-links">
-            <li><a href="booking.php">booking</a></li>
+            <li><a href="booking.php">Booking</a></li>
             <li><a href="contact.html">Vragen & contact</a></li>
             <li><a href="overons.html">Over ons</a></li>
             <a href="logout.php">Uitloggen</a>
         </ul>
     </nav>
-    <a href="login.html">  <div><img class="login-image" src="images/account-black.png" alt="login"></div> </a>
 </header>
 
 <section class="login-container">
@@ -67,11 +66,11 @@ try {
             <input id="username" name="username" required>
 
             <label for="password">Wachtwoord</label>
-            <input id="password" name="password" required>
+            <input id="password" name="password" type="password" required>
 
-            <button type="submit" class="login-btn">Inloggen</button>
+            <button type="submit" class="login-btn">Registreren</button>
         </form>
-        <p class="register-link">al een account? <a href="login.php">login hier</a></p>
+        <p class="register-link">Al een account? <a href="login.php">login hier</a></p>
     </div>
 </section>
 

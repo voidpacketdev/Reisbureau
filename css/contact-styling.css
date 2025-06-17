@@ -153,3 +153,53 @@ a {
     color: black;
     font-weight: bold;
 }
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .navigatie {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .login-parent {
+        margin-top: 10px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .contact-container,
+    .faq-section {
+        width: 90%;
+        margin: 30px auto;
+        padding: 15px;
+    }
+
+    form input,
+    form textarea,
+    form button {
+        font-size: 15px;
+    }
+
+    .background {
+        height: 250px;
+        background-position: center center;
+    }
+
+    .logo-image {
+        width: 120px;
+        height: auto;
+    }
+
+    .login-image {
+        width: 30px;
+        height: 30px;
+    }
+}

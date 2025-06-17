@@ -369,3 +369,102 @@ color: white;
     margin-bottom: 5px;
     border-radius: 8px;
 }
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .navigatie, .login-parent {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+        gap: 20px;
+    }
+
+    .nav-zoekbalk {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .zoekveld,
+    .nav-zoekveld,
+    .nav-zoekknop {
+        width: 90%;
+        max-width: 300px;
+    }
+
+    .zoekbalk {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .landen-kaarten {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .kaart {
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+    }
+
+    .verzekeringen {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+        max-width: 360px;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .footer-socials .icons {
+        justify-content: center;
+    }
+
+    nav {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 15px 0;
+        border-radius: 10px;
+    }
+
+    nav a {
+        padding: 10px 20px;
+        font-size: 18px;
+        color: #000;
+        text-align: center;
+    }
+
+    .nav-zoekbalk {
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0;
+    }
+
+    .zoekveld,
+    .nav-zoekveld,
+    .nav-zoekknop {
+        width: 90%;
+        max-width: 300px;
+        margin-bottom: 10px;
+    }
+
+
+
+}

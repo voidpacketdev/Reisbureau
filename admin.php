@@ -18,6 +18,7 @@ try {
 if (isset($_GET["gelezen"])) {
     $stmt = $conn->prepare("UPDATE contactberichten SET gelezen = 1 WHERE id = ?");
     $stmt->execute([$_GET["gelezen"]]);
+    $_SESSION["flash"] = "Bericht gemarkeerd als gelezen.";
     header("Location: admin.php");
     exit;
 }
@@ -25,27 +26,39 @@ if (isset($_GET["gelezen"])) {
 if (isset($_GET["verwijder_bericht"])) {
     $stmt = $conn->prepare("DELETE FROM contactberichten WHERE id = ?");
     $stmt->execute([$_GET["verwijder_bericht"]]);
+    $_SESSION["flash"] = "Bericht verwijderd.";
     header("Location: admin.php");
     exit;
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST["toevoegen"])) {
-        $stmt = $conn->prepare("INSERT INTO reizen (bestemming, verblijf, prijs, foto, beschrijving) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([
-            $_POST["bestemming"], $_POST["verblijf"],
-            $_POST["prijs"], $_POST["foto"], $_POST["beschrijving"]
-        ]);
+        if (!is_numeric($_POST["prijs"])) {
+            $_SESSION["flash"] = "Prijs moet een geldig getal zijn.";
+        } else {
+            $stmt = $conn->prepare("INSERT INTO reizen (bestemming, verblijf, prijs, foto, beschrijving) VALUES (?, ?, ?, ?, ?)");
+            $stmt->execute([
+                $_POST["bestemming"], $_POST["verblijf"],
+                $_POST["prijs"], $_POST["foto"], $_POST["beschrijving"]
+            ]);
+            $_SESSION["flash"] = "Reis succesvol toegevoegd!";
+        }
         header("Location: admin.php");
         exit;
     }
+
     if (isset($_POST["update"])) {
-        $stmt = $conn->prepare("UPDATE reizen SET bestemming=?, verblijf=?, prijs=?, foto=?, beschrijving=? WHERE id=?");
-        $stmt->execute([
-            $_POST["bestemming"], $_POST["verblijf"],
-            $_POST["prijs"], $_POST["foto"], $_POST["beschrijving"],
-            $_POST["id"]
-        ]);
+        if (!is_numeric($_POST["prijs"])) {
+            $_SESSION["flash"] = "Prijs moet een geldig getal zijn.";
+        } else {
+            $stmt = $conn->prepare("UPDATE reizen SET bestemming=?, verblijf=?, prijs=?, foto=?, beschrijving=? WHERE id=?");
+            $stmt->execute([
+                $_POST["bestemming"], $_POST["verblijf"],
+                $_POST["prijs"], $_POST["foto"], $_POST["beschrijving"],
+                $_POST["id"]
+            ]);
+            $_SESSION["flash"] = "Reis bijgewerkt.";
+        }
         header("Location: admin.php");
         exit;
     }
@@ -54,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 if (isset($_GET["verwijder"])) {
     $stmt = $conn->prepare("DELETE FROM reizen WHERE id = ?");
     $stmt->execute([$_GET["verwijder"]]);
+    $_SESSION["flash"] = "Reis verwijderd.";
     header("Location: admin.php");
     exit;
 }
@@ -69,13 +83,13 @@ if (!empty($_GET["zoek"])) {
 } else {
     $reizen = $conn->query("SELECT * FROM reizen ORDER BY id DESC")->fetchAll();
 }
-
 ?>
 
 <!doctype html>
 <html lang="nl">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adminpaneel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/admin-styling.css">
@@ -89,6 +103,13 @@ if (!empty($_GET["zoek"])) {
         <a href="logout.php">Uitloggen</a>
     </div>
     <h1 class="text-center mb-4">Adminpaneel</h1>
+
+    <?php if (isset($_SESSION["flash"])): ?>
+        <div class="alert alert-success text-center">
+            <?= $_SESSION["flash"] ?>
+            <?php unset($_SESSION["flash"]); ?>
+        </div>
+    <?php endif; ?>
 
     <!-- Contactberichten -->
     <div class="card mb-4">
@@ -116,11 +137,9 @@ if (!empty($_GET["zoek"])) {
     </div>
 
     <!-- Nieuwe reis toevoegen -->
-    <div class="container" >
+    <div class="container">
         <div class="card mb-4 mx-auto">
-            <div class="card-header">
-                <h2 class="h5 mb-0 text-center">Nieuwe reis toevoegen</h2>
-            </div>
+            <div class="card-header text-center"><h2 class="h5 mb-0">Nieuwe reis toevoegen</h2></div>
             <div class="card-body">
                 <form method="post" class="row g-3">
                     <div class="col-md-6">
@@ -146,13 +165,13 @@ if (!empty($_GET["zoek"])) {
         </div>
     </div>
 
-    <!-- Bestaande reizen bewerken -->
+    <!-- Bestaande reizen beheren -->
     <div class="card mb-4">
         <div class="card-header"><h2 class="h5 mb-0">Bestaande reizen beheren</h2></div>
         <div class="card-body">
-            <form method="get" class="mb-3 d-flex justify-content-end" >
+            <form method="get" class="mb-3 d-flex justify-content-end">
                 <input type="text" name="zoek" value="<?= isset($_GET["zoek"]) ? htmlspecialchars($_GET["zoek"]) : '' ?>"
-                       class="form-control me-2"  placeholder="Zoek op bestemming, verblijf of beschrijving">
+                       class="form-control me-2" placeholder="Zoek op bestemming, verblijf of beschrijving">
                 <button type="submit" class="btn btn-primary">Zoek</button>
             </form>
 
@@ -190,7 +209,7 @@ if (!empty($_GET["zoek"])) {
         </div>
     </div>
 
-</div> <!-- container-fluid -->
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

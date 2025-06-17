@@ -121,3 +121,69 @@ footer{
     color: #444;
     line-height: 1.4;
 }
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .navigatie {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .login-parent {
+        margin-top: 10px;
+    }
+
+    .nav-zoekbalk {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .nav-zoekveld,
+    .nav-zoekknop {
+        width: 90%;
+        max-width: 300px;
+    }
+
+    .zoekbalk {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .zoekveld,
+    .zoekknop {
+        width: 90%;
+    }
+
+    .landen-kaarten {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .kaart {
+        width: 90%;
+        max-width: 350px;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .footer-socials {
+        margin-top: 20px;
+    }
+}

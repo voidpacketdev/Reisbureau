@@ -129,6 +129,10 @@ footer{
         text-align: center;
     }
 
+    .reizen-parent{
+        margin-top: 800px;
+    }
+
     .navigatie {
         display: flex;
         flex-direction: column;
@@ -169,6 +173,7 @@ footer{
     .landen-kaarten {
         flex-direction: column;
         align-items: center;
+        margin-top: 800px;
     }
 
     .kaart {

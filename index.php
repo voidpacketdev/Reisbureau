@@ -44,7 +44,7 @@ $reizen = $stmt->fetchAll();
 
 <div class="background">
     <nav>
-        <div>
+        <div class="logo">
             <a href="index.php"><img src="images/logo.png" alt="JMLogo"></a>
         </div>
         <div class="navigatie">
@@ -52,6 +52,7 @@ $reizen = $stmt->fetchAll();
             <a href="contact.html">Vragen & Contact</a>
             <a href="overons.html">Over ons</a>
             <a href="logout.php">Uitloggen</a>
+            <a class="login" href="login.php">Login</a>
         </div>
 
         <div class="login-parent">

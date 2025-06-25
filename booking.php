@@ -58,7 +58,7 @@
         <button type="submit" class="zoekknop">Toon vakanties</button>
     </form>
 </div>
-<div class="landen-kaarten">
+<div class="landen-kaarten2">
 
 
         <?php

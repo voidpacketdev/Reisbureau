@@ -12,12 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["reis_id"])) {
 
     header("Location: booking.php?id=" . $reis_id);
     exit;
-
-
-
 }
 
-// Ophalen van reis voor weergave
 if (isset($_GET["id"])) {
     $stmt = $conn->prepare("SELECT * FROM reizen WHERE id = ?");
     $stmt->execute([$_GET["id"]]);
@@ -28,21 +24,21 @@ if (isset($_GET["id"])) {
 } else {
     die("Geen reis-id opgegeven.");
 }
-
-
-
-
 ?>
 
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recensie toevoegen</title>
-    <link rel="stylesheet" href="css/booking-styling.css">
+    <link rel="stylesheet" href="css/recensie_toevoegen.css">
+
 </head>
 <body>
+
 <h2>Recensie plaatsen voor: <?= htmlspecialchars($reis["bestemming"]) ?></h2>
+
 <form action="recensie_toevoegen.php" method="post">
     <select name="beoordeling" required>
         <option value="">-- Beoordeling --</option>
@@ -53,14 +49,11 @@ if (isset($_GET["id"])) {
         <option value="5">5 sterren</option>
     </select>
 
-
-
     <input type="text" name="naam" placeholder="Jouw naam" required>
     <input type="email" name="email" placeholder="Jouw e-mailadres" required>
     <textarea name="recensie" placeholder="Jouw recensie..." required></textarea>
     <input type="hidden" name="reis_id" value="<?= htmlspecialchars($reis["id"]) ?>">
     <button type="submit">Plaats recensie</button>
-
 </form>
 
 </body>

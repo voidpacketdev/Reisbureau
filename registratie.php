@@ -41,20 +41,23 @@ try {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J&M Travel | Registratie</title>
     <link rel="stylesheet" href="css/index-styling.css">
     <link rel="stylesheet" href="css/login-styling.css">
+    <link rel="stylesheet" href="css/registratie-styling.css">
 </head>
 <body>
 <header class="main-header">
     <a class="logo" href="index.php"><img src="images/logo.png" alt="JMLogo"></a>
     <nav>
-        <ul class="nav-links">
-            <li><a href="booking.php">Booking</a></li>
-            <li><a href="contact.html">Vragen & contact</a></li>
-            <li><a href="overons.html">Over ons</a></li>
+        <div class="nav-links">
+            <a href="booking.php">Booking</a>
+            <a href="contact.html">Vragen & contact</a>
+            <a href="overons.html">Over ons</a>
             <a href="logout.php">Uitloggen</a>
-        </ul>
+            <a class="login" href="login.php">login</a>
+        </div>
     </nav>
 </header>
 

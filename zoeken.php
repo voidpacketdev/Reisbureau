@@ -21,7 +21,9 @@ if (isset($_GET['zoekwoord']) && !empty($_GET['zoekwoord'])) {
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Zoeken</title>
+    <link rel="stylesheet" href="css/zoeken-styling.css">
     <link rel="stylesheet" href="css/index-styling.css">
 </head>
 <body>
@@ -43,10 +45,11 @@ if (isset($_GET['zoekwoord']) && !empty($_GET['zoekwoord'])) {
                 <button type="submit">Zoeken</button>
             </form>
 
-
+<div class="login">
             <a href="login.php">
                 <div><img class="login-image" src="images/account.png" alt="login"></div>
             </a>
+</div>
         </div>
     </nav>
 

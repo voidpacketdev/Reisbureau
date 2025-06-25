@@ -47,6 +47,7 @@ $boekingen = $stmt->fetchAll();
             <a href="contact.html">Vragen & Contact</a>
             <a href="overons.html">Over ons</a>
             <a href="logout.php">Uitloggen</a>
+            <a href="admin.php">Adminpaneel</a>
         </div>
 
         <div class="login-parent">

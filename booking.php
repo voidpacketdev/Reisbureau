@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/index-styling.css">
     <link rel="stylesheet" href="css/booking-styling.css">
-    <title>Document</title>
+    <title>Boekingen | J&M Travel</title>
 </head>
 <body>
 

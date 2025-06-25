@@ -16,7 +16,7 @@ h1, h2 {
 }
 
 /* Navigatie */
-.navigatie {
+.header-nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -25,7 +25,7 @@ h1, h2 {
     padding: 10px;
 }
 
-.navigatie a {
+.header-nav a {
     color: black;
     text-decoration: none;
     font-weight: bold;
@@ -34,8 +34,20 @@ h1, h2 {
     transition: background-color 0.2s;
 }
 
-.navigatie a:hover {
+.header-nav a:hover {
     background-color: #e2e6ea;
+}
+
+/* nav */
+nav a {
+    text-decoration: none;
+    color: black;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 /* Cards */
@@ -193,3 +205,5 @@ th {
     padding-left: 1rem;
     padding-right: 1rem;
 }
+
+

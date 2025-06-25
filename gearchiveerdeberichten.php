@@ -55,6 +55,12 @@ if (isset($_GET["dearchiveer"])) {
     <a href="gelezenberichten.php">Gelezen berichten</a>
     <a href="contactberichten.php">Inbox</a>
 </nav>
+<?php if (isset($_SESSION["flash"])): ?>
+    <div class="alert alert-success text-center mx-4">
+        <?= $_SESSION["flash"] ?>
+        <?php unset($_SESSION["flash"]); ?>
+    </div>
+<?php endif; ?>
 <h1 class="adminpanel-text">Adminpaneel</h1>
 <div class="card mb-4">
     <div class="card-header">

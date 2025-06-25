@@ -67,3 +67,45 @@ nav {
     justify-content: center;
     margin-top: 30px;
 }
+
+
+.card-body {
+    padding: 1rem;
+}
+
+
+.contactberichten-title {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+
+@media (max-width: 768px) {
+    .header-nav,
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .header-nav a,
+    nav a {
+        width: 100%;
+        text-align: center;
+        padding: 8px 0;
+    }
+
+    .card-body h5 {
+        font-size: 1.1rem;
+    }
+
+    .card-body p,
+    .card-body small {
+        font-size: 0.95rem;
+    }
+
+    .btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

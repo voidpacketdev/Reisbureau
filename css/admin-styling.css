@@ -166,44 +166,41 @@ th {
     vertical-align: middle !important;
 }
 
-/* Responsieve tabel container */
 @media (max-width: 768px) {
-    table {
+    .header-nav,
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .header-nav a,
+    nav a {
         display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-}
-
-
-@media (max-width: 768px) {
-    .card-body form.row > .col-md-4,
-    .card-body form.row > .col-md-6,
-    .card-body form.row > .col-md-12 {
-        width: 100% !important;
-        flex: 0 0 100%;
-        max-width: 100%;
+        margin-bottom: 8px;
     }
 
-    .col-12.text-end {
+    h1.text-center {
+        font-size: 1.5rem;
+    }
+
+    form.row.g-3 {
+        flex-direction: column;
+    }
+
+    form .form-control {
+        width: 100%;
+    }
+
+    .text-end {
         text-align: center !important;
     }
 
-    .btn {
-        width: 100%;
-        margin-bottom: 10px;
+    .card {
+        margin: 0 10px;
     }
 }
 
-.alert {
-    max-width: 700px;
-    margin: 0 auto 20px auto;
-}
-
-
-.container-fluid {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
 
 

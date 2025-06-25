@@ -18,19 +18,20 @@ if (!isset($_SESSION["gebruiker_id"]) || $_SESSION["rol"] !== 'admin') {
     <link rel="stylesheet" href="css/admin-styling.css">
 </head>
 <body class="bg-light">
-<div class="container-fluid py-4">
+<div class="container-fluid py-4 centered-container">
     <div class="header-nav">
         <a href="booking.php">Booking</a>
         <a href="contact.html">Vragen & Contact</a>
         <a href="logout.php">Uitloggen</a>
         <a href="account.php">Klantenpaneel</a>
     </div>
+    <h1 class="text-center mb-4">Adminpaneel</h1>
     <nav>
         <a href="bookingbewerken.php">Bookingen bewerken</a>
         <a href="nieuwereis.php">Nieuwe reis toevoegen</a>
         <a href="contactberichten.php">Contactenberichten</a>
     </nav>
-    <h1 class="text-center mb-4">Adminpaneel</h1>
+
 
 </div>
 </body>

@@ -67,3 +67,44 @@ nav {
     justify-content: center;
     margin-top: 30px;
 }
+
+@media (max-width: 768px) {
+    .header-nav,
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .header-nav a,
+    nav a {
+        margin-bottom: 10px;
+    }
+
+    .adminpanel-text {
+        justify-content: center;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    form.d-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    form.d-flex input {
+        width: 100%;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    td img {
+        max-width: 80px;
+        height: auto;
+    }
+}
+

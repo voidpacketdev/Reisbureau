@@ -27,7 +27,7 @@ body {
     color: #212529;
 }
 
-/* Navigatie */
+
 .header-nav {
     display: flex;
     flex-wrap: wrap;
@@ -50,7 +50,7 @@ body {
     background-color: #e2e6ea;
 }
 
-/* nav */
+
 nav a {
     text-decoration: none;
     color: black;
@@ -66,4 +66,54 @@ nav {
     display: flex;
     justify-content: center;
     margin-top: 30px;
+}
+
+
+.contactberichten-title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.card-body h5 {
+    font-size: 1.2rem;
+}
+
+.card-body p {
+    margin-bottom: 0.5rem;
+}
+
+
+@media (max-width: 768px) {
+    .header-nav,
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .header-nav a,
+    nav a {
+        width: 100%;
+        text-align: center;
+        padding: 8px 0;
+    }
+
+    .card-body h5 {
+        font-size: 1.1rem;
+    }
+
+    .card-body p,
+    .card-body small {
+        font-size: 0.95rem;
+    }
+
+    .btn {
+        width: 100%;
+        margin-top: 8px;
+    }
+
+    .card div > .btn + .btn {
+        margin-top: 10px;
+    }
 }
